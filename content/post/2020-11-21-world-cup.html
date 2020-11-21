@@ -1,9 +1,6 @@
 ---
-title: "Hello R Markdown"
-author: "Frida Gomam"
-date: 2015-07-23T21:13:14-05:00
-categories: ["R"]
-tags: ["R Markdown", "plot", "regression"]
+title: "World cup"
+date: 2020-11-21
 ---
 
 
@@ -22,15 +19,15 @@ stats &lt;- read.csv(file = &quot;Players_Stats.csv&quot;)
 score &lt;- read.csv(file = &quot;Players_Score.csv&quot;)
 fixture &lt;- read.csv(file = &quot;Fixture.csv&quot;, header=F)
 teams &lt;- read.csv(file = &quot;Teams.csv&quot;)
-head(worldcup)
-##                Team   Position Time Shots Passes Tackles Saves
+head(worldcup)</code></pre>
+<pre><code>##                Team   Position Time Shots Passes Tackles Saves
 ## Abdoun      Algeria Midfielder   16     0      6       0     0
 ## Abe           Japan Midfielder  351     0    101      14     0
 ## Abidal       France   Defender  180     0     91       6     0
 ## Abou Diaby   France Midfielder  270     1    111       5     0
 ## Aboubakar  Cameroon    Forward   46     2     16       0     0
-## Abreu       Uruguay    Forward   72     0     15       0     0
-attach(worldcup)
+## Abreu       Uruguay    Forward   72     0     15       0     0</code></pre>
+<pre class="r"><code>attach(worldcup)
 world=worldcup</code></pre>
 <hr />
 </div>
@@ -43,14 +40,14 @@ world=worldcup</code></pre>
   ggplot(aes(x=reorder(Team, Points),  y=Points, fill=Team)) + geom_bar(stat=&quot;identity&quot;) +
   coord_flip() +
   labs(x=&quot;Team&quot;, y=&quot;Points&quot;, title=&quot;Top 10 teams by points&quot;)</code></pre>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/post/2020-11-21-world-cup_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Germany had the best overall performance, followed by Brazil. The champion France performed in seventh place.</p>
 <p><br/></p>
 <p><strong>The relationship between country and number of shots on goal</strong></p>
 <pre class="r"><code>ggplot(world,aes(x=Team,y=Shots,fill=Team))+
   geom_bar(aes(fill=rownames(worldcup)),stat=&quot;identity&quot;,show.legend=F)+
   coord_flip() + ggtitle(&quot;Teams and number of shots&quot;)</code></pre>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/post/2020-11-21-world-cup_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Spain had the most total shots on goal, France did not stand out.
 Overall, the World Cup winner is not determined by the skill of the team alone.</p>
 <hr />
@@ -60,15 +57,15 @@ Overall, the World Cup winner is not determined by the skill of the team alone.<
 <p><strong>Distribution of ages</strong></p>
 <pre class="r"><code>ggplot(data=score, aes(x=age)) + geom_histogram(fill=&quot;#00bfc4&quot;, bins=30) + 
   labs(x=&quot;Age&quot;, title=&quot;Distribution of ages&quot;)</code></pre>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/post/2020-11-21-world-cup_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Most of the players are near the age of 25.</p>
 <p><br/></p>
 <p><strong>Scatter plot of rating and PS</strong></p>
 <pre class="r"><code>ggplot(data=score, aes(x=PS, y=Rating)) + geom_point(colour=&quot;#00bfc4&quot;, alpha=0.2) +
   geom_smooth(method=&quot;lm&quot;, colour=&quot;#F8766D&quot;) +
-  labs(x=&quot;PS&quot;, y=&quot;Rating&quot;, title=&quot;Scatter plot of rating and PS&quot;)
-## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+  labs(x=&quot;PS&quot;, y=&quot;Rating&quot;, title=&quot;Scatter plot of rating and PS&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/post/2020-11-21-world-cup_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Passing is a technique that allows the ball to travel up field. In doing this, your opponents will find it more difficult to gain control of the ball.
 The players’ rating is directly proportional to the passer rating, the higher the passer rating, the higher the rating.</p>
 <hr />
@@ -79,6 +76,6 @@ The players’ rating is directly proportional to the passer rating, the higher 
 <pre class="r"><code>stats$total &lt;- as.numeric(gsub(&quot;,&quot;, &quot;&quot;, stats$total))
 stats %&gt;% filter(club %in% c(&quot;Forward - Vitesse&quot;, &quot;Forward - CSKA&quot;)) %&gt;%
   ggplot(aes(x=club, y=total)) + geom_boxplot(aes(fill=club))</code></pre>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/post/2020-11-21-world-cup_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 </div>
