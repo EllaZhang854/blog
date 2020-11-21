@@ -10,28 +10,84 @@ tags: ["R Markdown", "plot", "regression"]
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-# R Markdown
+## Introduction
+2018 FIFA World Cup™ winners France netted 14 goals en route to lifting the Trophy in Moscow, taking place from June 14 to July 15, 2018. This portfolio will visualize the data of the players and teams involved in this World Cup.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+***
 
-You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-fit <- lm(dist ~ speed, data = cars)
-fit
+## Reading data
+```{r warning=F, message=F}
+library(faraway)
+library(dplyr)
+library(ggplot2)
+stats <- read.csv(file = "Players_Stats.csv")
+score <- read.csv(file = "Players_Score.csv")
+fixture <- read.csv(file = "Fixture.csv", header=F)
+teams <- read.csv(file = "Teams.csv")
+head(worldcup)
+attach(worldcup)
+world=worldcup
 ```
 
-# Including Plots
+***
 
-You can also embed plots. See Figure \@ref(fig:pie) for example:
+## Data Analysis
 
-```{r pie, fig.cap='A fancy pie chart.', tidy=FALSE}
-par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c('Sky', 'Sunny side of pyramid', 'Shady side of pyramid'),
-  col = c('#0292D8', '#F7EA39', '#C4B632'),
-  init.angle = -50, border = NA
-)
+### Team performance
+
+**Top 10 teams by points**
+```{r}
+teams %>% arrange(desc(Points)) %>% head(10) %>%
+  ggplot(aes(x=reorder(Team, Points),  y=Points, fill=Team)) + geom_bar(stat="identity") +
+  coord_flip() +
+  labs(x="Team", y="Points", title="Top 10 teams by points")
+```
+
+Germany had the best overall performance, followed by Brazil. The champion France performed in seventh place.
+
+<br/>
+
+**The relationship between country and number of shots on goal**
+```{r}
+ggplot(world,aes(x=Team,y=Shots,fill=Team))+
+  geom_bar(aes(fill=rownames(worldcup)),stat="identity",show.legend=F)+
+  coord_flip() + ggtitle("Teams and number of shots")
+```
+
+Spain had the most total shots on goal, France did not stand out.
+Overall, the World Cup winner is not determined by the skill of the team alone.
+
+***
+
+### Player performance
+
+**Distribution of ages**
+```{r}
+ggplot(data=score, aes(x=age)) + geom_histogram(fill="#00bfc4", bins=30) + 
+  labs(x="Age", title="Distribution of ages")
+```
+
+Most of the players are near the age of 25.
+
+<br/>
+
+**Scatter plot of rating and PS**
+```{r}
+ggplot(data=score, aes(x=PS, y=Rating)) + geom_point(colour="#00bfc4", alpha=0.2) +
+  geom_smooth(method="lm", colour="#F8766D") +
+  labs(x="PS", y="Rating", title="Scatter plot of rating and PS")
+```
+
+Passing is a technique that allows the ball to travel up field. In doing this, your opponents will find it more difficult to gain control of the ball.
+The players' rating is directly proportional to the passer rating, the higher the passer rating, the higher the rating.
+
+***
+
+### Comparison
+
+**Box-plot of two clubs**
+```{r}
+stats$total <- as.numeric(gsub(",", "", stats$total))
+stats %>% filter(club %in% c("Forward - Vitesse", "Forward - CSKA")) %>%
+  ggplot(aes(x=club, y=total)) + geom_boxplot(aes(fill=club))
 ```
