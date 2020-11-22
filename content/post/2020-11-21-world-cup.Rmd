@@ -1,5 +1,5 @@
 ---
-title: "World cup"
+title: "2018 World Cup"
 date: "2020-11-21" 
 ---
 
@@ -13,9 +13,8 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Introduction
 2018 FIFA World Cup™ winners France netted 14 goals en route to lifting the Trophy in Moscow, taking place from June 14 to July 15, 2018. This portfolio will visualize the data of the players and teams involved in this World Cup.
 
-***
 
-```{r warning=F, message=F}
+```{r warning=F, message=F, echo=F, include=F}
 library(faraway)
 library(dplyr)
 library(ggplot2)
@@ -26,7 +25,6 @@ teams <- read.csv(file = "Teams.csv")
 world <- worldcup
 ```
 
-***
 
 ## Data Analysis
 
@@ -69,7 +67,7 @@ Most of the players are near the age of 25.
 <br/>
 
 **Scatter plot of rating and PS**
-```{r}
+```{r warning=F, message=F}
 ggplot(data=score, aes(x=PS, y=Rating)) + geom_point(colour="#00bfc4", alpha=0.2) +
   geom_smooth(method="lm", colour="#F8766D") +
   labs(x="PS", y="Rating", title="Scatter plot of rating and PS")
