@@ -15,7 +15,6 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ***
 
-## Reading data
 ```{r warning=F, message=F}
 library(faraway)
 library(dplyr)
@@ -24,9 +23,7 @@ stats <- read.csv(file = "Players_Stats.csv")
 score <- read.csv(file = "Players_Score.csv")
 fixture <- read.csv(file = "Fixture.csv", header=F)
 teams <- read.csv(file = "Teams.csv")
-head(worldcup)
-attach(worldcup)
-world=worldcup
+world <- worldcup
 ```
 
 ***
