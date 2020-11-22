@@ -1,11 +1,12 @@
 ---
 title: "World cup"
 date: 2020-11-21
+author: "z5221854-Yuchong Zhang"
 ---
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## Introduction
