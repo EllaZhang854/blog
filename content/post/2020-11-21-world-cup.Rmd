@@ -1,13 +1,14 @@
 ---
 title: "World cup"
-date: 2020-11-21
-author: "z5221854-Yuchong Zhang"
+date: "2020-11-21" 
 ---
 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+**z5221854-Yuchong Zhang**
 
 ## Introduction
 2018 FIFA World Cup™ winners France netted 14 goals en route to lifting the Trophy in Moscow, taking place from June 14 to July 15, 2018. This portfolio will visualize the data of the players and teams involved in this World Cup.
